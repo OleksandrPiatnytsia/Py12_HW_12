@@ -32,9 +32,6 @@ class ContactSchema(BaseModel):
     email: EmailStr
     phone: str = Field('+380967774411', length=13)
     birthday: date
-    created_at: datetime
-    updated_at: datetime
-    user: UserResponseSchema
 
     class Config:
         from_attributes = True
@@ -42,3 +39,5 @@ class ContactSchema(BaseModel):
 
 class ContactSchemaResponse(ContactSchema):
     id: str = Field('1', min_length=1, max_length=36)
+    created_at: datetime
+    updated_at: datetime

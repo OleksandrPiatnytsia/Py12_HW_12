@@ -4,10 +4,11 @@ from sqlalchemy.orm import Session
 
 from src.database.db import get_db
 
-from src.routes import contacts
+from src.routes import contacts, auth
 
 app = FastAPI()
 
+app.include_router(auth.router)
 app.include_router(contacts.router)
 app.include_router(contacts.birthday_router)
 

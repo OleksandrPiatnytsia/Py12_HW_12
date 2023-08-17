@@ -15,8 +15,8 @@ def get_contact_by_id(contact_id, session):
 
     return contact
 
-def get_contact_by_phone(phone, session):
 
+def get_contact_by_phone(phone, session):
     return session.query(Contact).filter_by(phone=phone).first()
 
 
@@ -24,19 +24,15 @@ def get_contact_by_name(name, session):
     return session.query(Contact).filter_by(name=name).first()
 
 
-
 def get_contact_by_email(email, session):
     return session.query(Contact).filter_by(email=email).first()
-
 
 
 def get_contact_by_sur_name(sur_name, session):
     return session.query(Contact).filter_by(sur_name=sur_name).first()
 
 
-
 def create_contact(body, session):
-
     contact = Contact()
     contact.phone = body.phone
     contact.email = body.email
