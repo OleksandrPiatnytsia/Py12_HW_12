@@ -12,6 +12,7 @@ sqlalchemy = "^2.0.20"
 fastapi = {extras = ["all"], version = "^0.101.1"}
 psycopg2 = "^2.9.7"
 alembic = "^1.11.3"
+libgravatar = "^1.0.4"
 
 
 [build-system]

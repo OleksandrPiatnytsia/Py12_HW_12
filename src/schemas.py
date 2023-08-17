@@ -14,3 +14,26 @@ class ContactSchema(BaseModel):
 
 class ContactSchemaResponse(ContactSchema):
     id: str = Field('1', min_length=1, max_length=36)
+
+
+class UserSchema(BaseModel):
+    username: str = Field(min_length=5, max_length=16)
+    email: EmailStr
+    password: str = Field(min_length=6, max_length=16)
+
+
+class UserResponseSchema(BaseModel):
+    id: int
+    username: str
+    email: str
+    avatar: str
+
+    class Config:
+        from_attributes = True
+
+
+class TokenModel(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+
