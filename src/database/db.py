@@ -15,6 +15,9 @@ domain = config.get('DB', 'DOMAIN')
 port = config.get('DB', 'PORT')
 database = config.get('DB', 'DB_NAME')
 
+secret_key = config.get('AUTH', 'SECRET_KEY')
+algorithm = config.get('AUTH', 'ALGORITHM')
+
 URI = f"postgresql://{username}:{password}@{domain}:{port}/{database}"
 print(URI)
 
