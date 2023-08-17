@@ -27,8 +27,8 @@ DBSession = sessionmaker(bind=engine)
 
 # Dependency
 def get_db():
-    db = DBSession()
+    session = DBSession()
     try:
-        yield db
+        yield session
     finally:
-        db.close()
+        session.close()

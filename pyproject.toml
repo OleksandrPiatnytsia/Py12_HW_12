@@ -10,6 +10,8 @@ packages = [{include = "hw_12"}]
 python = "^3.11"
 sqlalchemy = "^2.0.20"
 fastapi = {extras = ["all"], version = "^0.101.1"}
+psycopg2 = "^2.9.7"
+alembic = "^1.11.3"
 
 
 [build-system]
