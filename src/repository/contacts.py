@@ -3,48 +3,52 @@ from datetime import datetime
 from sqlalchemy import text
 
 from src.database.models import Contact
+from sqlalchemy.orm import Session
+from src.database.models import User
 
 
-def get_contacts(session):
-    contacts = session.query(Contact).all()
+def get_contacts(user: User, session: Session):
+    contacts = session.query(Contact).filter_by(user=user).all()
     return contacts
 
 
-def get_contact_by_id(contact_id, session):
-    contact = session.query(Contact).filter_by(id=contact_id).first()
+def get_contact_by_id(contact_id, user: User, session: Session):
+    contact = session.query(Contact).filter_by(id=contact_id, user=user).first()
 
     return contact
 
 
-def get_contact_by_phone(phone, session):
-    return session.query(Contact).filter_by(phone=phone).first()
+def get_contact_by_phone(phone, user: User, session: Session):
+    return session.query(Contact).filter_by(phone=phone, user=user).first()
 
 
-def get_contact_by_name(name, session):
+def get_contact_by_name(name, user: User, session: Session):
     return session.query(Contact).filter_by(name=name).first()
 
 
-def get_contact_by_email(email, session):
+def get_contact_by_email(email, user: User, session: Session):
     return session.query(Contact).filter_by(email=email).first()
 
 
-def get_contact_by_sur_name(sur_name, session):
+def get_contact_by_sur_name(sur_name, user: User, session: Session):
     return session.query(Contact).filter_by(sur_name=sur_name).first()
 
 
-def create_contact(body, session):
+def create_contact(body, user: User, session: Session):
     contact = Contact()
     contact.phone = body.phone
     contact.email = body.email
     contact.name = body.name
     contact.sur_name = body.sur_name
     contact.birthday = body.birthday
+    contact.user = user
     session.add(contact)
     session.commit()
+    session.refresh(contact)
     return contact
 
 
-def delete_contact(contact, session):
+def delete_contact(contact, session: Session):
     session.delete(contact)
     session.commit()
 

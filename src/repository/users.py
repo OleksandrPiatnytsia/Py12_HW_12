@@ -16,7 +16,7 @@ def get_user_by_email(email: str, session) -> User:
     sq = select(User).filter_by(email=email)
     result = session.execute(sq)
     user = result.scalar_one_or_none()
-    logging.error(f"!!!!!!!!!!!!!!USER!!!!!!!!!!!!!!!!   {user}")
+    # logging.error(f"!!!!!!!!!!!!!!USER!!!!!!!!!!!!!!!!   {user}")
     return user
 
 

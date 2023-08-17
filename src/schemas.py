@@ -38,6 +38,6 @@ class ContactSchema(BaseModel):
 
 
 class ContactSchemaResponse(ContactSchema):
-    id: str = Field('1', min_length=1, max_length=36)
+    id: int
     created_at: datetime
     updated_at: datetime
