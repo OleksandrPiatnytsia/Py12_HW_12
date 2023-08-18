@@ -1,4 +1,3 @@
-import logging
 
 from typing import Optional
 
@@ -17,8 +16,7 @@ from src.database.db import secret_key, algorithm
 class Auth:
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     SECRET_KEY = secret_key
-    # ALGORITHM = algorithm
-    ALGORITHM = "HS256"
+    ALGORITHM = algorithm
     oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
     def verify_password(self, plain_password, hashed_password):
@@ -35,9 +33,6 @@ class Auth:
         else:
             expire = datetime.utcnow() + timedelta(minutes=120)
         to_encode.update({"iat": datetime.utcnow(), "exp": expire, "scope": "access_token"})
-
-        # logging.error(f"!!!!!!!!!!!!!!SECRET_KEY!!!!!!!!!!!!!!!!!!!!!!!! {self.SECRET_KEY}")
-        logging.error(f"!!!!!!!!!!!!!!ALGORITHM!!!!!!!!!!!!!!!!!!!!!!!! {self.ALGORITHM}")
 
         encoded_access_token = jwt.encode(to_encode, self.SECRET_KEY, algorithm=self.ALGORITHM)
         return encoded_access_token

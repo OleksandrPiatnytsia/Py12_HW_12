@@ -67,15 +67,16 @@ def update_contact(body, contact, session):
     return contact
 
 
-def get_contact_week_birthdays(session):
+def get_contact_week_birthdays(user: User, session: Session):
     current_date = datetime.now()
     current_month = current_date.month
 
     contacts = session.execute(text("""
             SELECT *
             FROM contacts AS con
-            WHERE EXTRACT(WEEK FROM con.birthday) = EXTRACT(WEEK FROM :current_date)
+            WHERE user_id = :userid
+                AND EXTRACT(WEEK FROM con.birthday) = EXTRACT(WEEK FROM :current_date)
               AND EXTRACT(MONTH FROM con.birthday) = :current_month;
-            """), {"current_date": current_date, "current_month": current_month}).all()
+            """), {"userid":user.id, "current_date": current_date, "current_month": current_month}).all()
 
     return contacts
